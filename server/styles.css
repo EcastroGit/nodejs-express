@@ -1,0 +1,71 @@
+body {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	height: 100vh;
+	background: #e53935;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #e35d5b, #e53935);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #e35d5b, #e53935); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+h1, h2 {
+	color: orangered;
+	font-family: 'Edu SA Beginner', cursive;
+}
+p {
+	color: orangered;
+	font-size: 1.5rem;
+	font-family: 'Edu SA Beginner', cursive;
+}
+a {
+	text-decoration: none;
+	color: white;
+	font-size: 1.2rem;
+	font-weight: bold;
+	font-family: 'Edu SA Beginner', cursive;
+}
+img{
+	width: 100%;
+	max-width: 500px;
+}
+#banner {
+	width: 50%;
+	height: fit-content;
+	margin: auto;
+	padding: 20px;
+	border-radius: 7px;
+	background-color: rgba(241, 241, 241, 0.918);
+}
+.cta{
+	width: fit-content;
+	height: fit-content;
+	margin: 20px auto 20px;
+	padding: 7px;
+	border-radius: 3px;
+	background-color: orangered;
+	color: white;
+}
+.cta:hover {
+	background-color: red;
+	cursor: pointer;
+}
+#quotes {
+	background-color: rgba(241, 241, 241, 0.918);
+	width: 70%;
+	height: fit-content;
+	padding: 20px;
+	border-radius: 7px;
+}
+.card {
+	border: 1px solid #918e8e;
+	border-radius: 4px;
+	margin: 10px;
+	background-color: white;
+}
+.card:hover{
+	cursor: pointer;
+}
+.card p:hover{
+	color: red;
+}
