@@ -1,0 +1,84 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+  background: #373b44; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #4286f4,
+    #373b44
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #4286f4,
+    #373b44
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+#container {
+  width: fit-content;
+  margin: auto;
+}
+#categories {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+  background-color: white;
+  border-radius: 5px;
+  border: 2px solid rgb(102, 99, 99);
+  height: 50px;
+  width: auto;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.option {
+  background-color: rgb(7, 78, 172);
+  color: white;
+  width: fit-content;
+  height: fit-content;
+  padding: 5px;
+  margin: auto;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.option:hover {
+  cursor: pointer;
+  background-color: aqua;
+}
+#app {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 10px;
+  padding: 20px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: white;
+  border-radius: 5px;
+  border: 2px solid rgb(102, 99, 99);
+  height: fit-content;
+  width: fit-content;
+  max-width: 600px;
+  text-align: center;
+}
+.card1 {
+  background-color: #c5c7cc;
+  height: 120px;
+  width: 150px;
+  margin: 5px auto 5px;
+  border-radius: 5px;
+  border: 2px solid rgb(95, 94, 94);
+}
+.card2 {
+  background-color: #b8c9f1;
+  height: 120px;
+  width: 150px;
+  margin: 5px auto 5px;
+  border-radius: 5px;
+  border: 2px solid rgb(95, 94, 94);
+}

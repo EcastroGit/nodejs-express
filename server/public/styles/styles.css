@@ -69,3 +69,13 @@ img{
 .card p:hover{
 	color: red;
 }
+#redirect {
+	background-color: white;
+	padding: 20px;
+	border-radius: 5px;
+
+}
+#redirect a {
+	color: orangered;
+	text-decoration: none;
+}

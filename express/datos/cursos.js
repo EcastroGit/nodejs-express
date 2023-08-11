@@ -23,10 +23,10 @@ let infoCursos = {
     },
     {
       id: 4,
-      titulo: "Backend en PHP",
-      lenguaje: "php",
+      titulo: "Aprende java",
+      lenguaje: "java",
       vistas: 9250,
-      nivel: "avanzado",
+      nivel: "basico",
     },
   ],
   matematicas: [
@@ -35,7 +35,7 @@ let infoCursos = {
       titulo: "Aprende cálculo",
       tema: "cálculo",
       vistas: 12433,
-      nivel: "intermedio",
+      nivel: "avanzado",
     },
     {
       id: 2,
@@ -46,11 +46,18 @@ let infoCursos = {
     },
     {
       id: 3,
-      titulo: "Aprende matemáticas básicas",
-      tema: "matemáticas básicas",
+      titulo: "Aprende estadística",
+      tema: "estadística",
       vistas: 9700,
       nivel: "avanzado",
     },
+    {
+      id: 4,
+      titulo: "Aprende trigonometría",
+      tema: "trigonometría",
+      vistas: 9700,
+      nivel: "intermedio",
+    }
   ],
 };
 

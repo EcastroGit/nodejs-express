@@ -29,7 +29,7 @@ const server = http.createServer((req, res) => {
     const path = req.url;
     if (path === "/") {
       // se sirve el index.html
-      fs.readFile("server/index.html", (err, data) => {
+      fs.readFile("server/public/index.html", (err, data) => {
         if (err) {
           res.writeHead(500, { "Content-Type": "text/plain" });
           res.end("Internal Server Error");
@@ -41,7 +41,7 @@ const server = http.createServer((req, res) => {
       });
     } else if (path === "/scripts/clientLogic.js") {
       // Se sirve clientLogic.js
-      fs.readFile("server/clientLogic.js", (err, data) => {
+      fs.readFile("server/public/scripts/clientLogic.js", (err, data) => {
         if (err) {
           res.writeHead(500, { "Content-Type": "text/plain" });
           res.end("Internal Server Error");
@@ -50,9 +50,9 @@ const server = http.createServer((req, res) => {
           res.end(data);
         }
       });
-    } else if (path === "/styles.css") {
+    } else if (path === "/main.css") {
       // se sirve styles.css
-      fs.readFile("server/styles.css", (err, data) => {
+      fs.readFile("server/public/styles/main.css", (err, data) => {
         if (err) {
           res.writeHead(500, { "Content-Type": "text/plain" });
           res.end("Internal Server Error");
@@ -63,7 +63,7 @@ const server = http.createServer((req, res) => {
       });
     } else if (path === "/notebook.jpg") {
       // Se sirve la imagen de portada
-      fs.readFile("server/assets/notebook.jpg", (err, data) => {
+      fs.readFile("server/public/assets/notebook.jpg", (err, data) => {
         if (err) {
           res.writeHead(500, { "Content-Type": "text/plain" });
           res.end("Server Error");
@@ -74,7 +74,7 @@ const server = http.createServer((req, res) => {
       });
     } else if (path === "/quotes") {
       // se sirve frases.html
-      fs.readFile("server/quotes.html", (err, data) => {
+      fs.readFile("server/public/quotes.html", (err, data) => {
         if (err) {
           res.writeHead(500, { "Content-Type": "text/plain" });
           res.end("Internal Server Error");
@@ -87,8 +87,17 @@ const server = http.createServer((req, res) => {
     } else {
       // se define la página 404
       res.statusCode = 404;
-      res.end(`Status ${res.statusCode}: recurso no encontrado`);
-      console.log("Status: 404");
+      fs.readFile("server/public/404.html", (err, data) => {
+        if (err) {
+          res.writeHead(500, { "Content-Type": "text/plain" });
+          res.end("Internal Server Error");
+        } else {
+          console.log("Status: " + res.statusCode);
+          res.writeHead(200, { "Content-Type": "text/html" });
+          res.end(data);
+        }
+      });
+      
     }
   };
 

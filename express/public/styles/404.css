@@ -1,0 +1,9 @@
+#redirect {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  border: 2px solid rgb(82, 76, 76);
+}
+.redirect-tag {
+  font-size: 2rem;
+}
