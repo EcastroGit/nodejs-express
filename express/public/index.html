@@ -3,17 +3,67 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>CRUD App</title>
     <link rel="stylesheet" href="/styles/main.css" />
-    <script defer src="/scripts/clientLogic.js"></script>
+    <script defer src="/scripts/clientCRUD.js"></script>
+    <script defer src="/scripts/formsGenerator.js"></script>
   </head>
   <body>
+    <h1>CRUD App by Esteban Castro</h1>
     <div id="container">
-      <div id="categories">
-        <div id="programacion-btn" class="option">Programación</div>
-        <div id="matematicas-btn" class="option">Matemáticas</div>
+      <div id="forms-container">
+        <div id="crud-options">
+          <div id="create" class="option">Crear</div>
+          <div id="update" class="option">Actualizar</div>
+          <div id="delete" class="option">Eliminar</div>
+        </div>
+        <div id="category">
+          <label for="selector">Selecciona la categoría</label>
+          <select id="selector">
+            <option value="Frontend">Frontend</option>
+            <option value="Backend">Backend</option>
+          </select>
+        </div>
+        <div id="forms">
+          <p class="forms-tag">Crear</p>
+          <form id="postForm" onsubmit="submitPostForm(event)">
+            <label for="id">ID:</label>
+            <input type="text" id="post-id" name="id" required /><br />
+
+            <label for="titulo">Título:</label>
+            <input type="text" id="post-titulo" name="titulo" required /><br />
+
+            <label for="lenguaje">Lenguaje:</label>
+            <input
+              type="text"
+              id="post-lenguaje"
+              name="lenguaje"
+              required
+            /><br />
+
+            <label for="nivel">Nivel:</label>
+            <input type="text" id="post-nivel" name="nivel" required /><br />
+
+            <button type="submit">Crear curso</button>
+          </form>
+        </div>
       </div>
-      <div id="app"><h1>Selecciona una categoría de interés</h1></div>
+      <div id="app-container">
+        <div id="categories">
+          <div id="frontend-btn" class="option" onclick="getFrontData()">Frontend</div>
+          <div id="backend-btn" class="option" onclick="getBackData()">Backend</div>
+        </div>
+        <div id="app">
+          <p>
+            <strong>App de operaciones CRUD:</strong> Click en el botón de frontend
+            o backend para obtener los cursos (get). En el panel de la
+            izquierda, elige la opción para crear (post), actualizar (put) o eliminar
+            (delete), selecciona la categoría y rellena el formulario
+            correspondiente.
+          </p>
+        </div>
+      </div>
     </div>
   </body>
 </html>

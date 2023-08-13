@@ -1,41 +1,140 @@
+/* Estilos generales */
+
 * {
   margin: 0;
   box-sizing: border-box;
 }
+
 body {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
-  height: 100vh;
+  height: auto;
   align-items: center;
-  background: #373b44; /* fallback for old browsers */
+  background: #373b44; 
   background: -webkit-linear-gradient(
     to right,
     #4286f4,
     #373b44
-  ); /* Chrome 10-25, Safari 5.1-6 */
+  ); 
   background: linear-gradient(
     to right,
     #4286f4,
     #373b44
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  ); 
 }
+h1 {
+  color: white;
+  margin: 20px auto 20px;
+}
+
 #container {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 15px;
+  height: fit-content;
   width: fit-content;
   margin: auto;
+  padding: 20px;
 }
+
+/* Estilos para el panel forms */
+
+#forms-container {
+  margin: 10px auto 10px;
+}
+
+#forms {
+  background-color: white;
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+  border-radius: 5px;
+}
+
+.forms-tag {
+  text-align: center; 
+  font-size: 1.5rem;
+  padding: 5px;
+}
+
+#crud-options {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+  background-color: white;
+  border-radius: 5px;
+  height: 50px;
+  width: auto;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#category {
+  background-color: white;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 10px
+}
+
+#selector:hover {
+  cursor: pointer;
+}
+
+form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 3px;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos para el display */
+
+#app-container {
+  width: fit-content;
+  margin: 10px auto 10px;
+}
+
 #categories {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-evenly;
   background-color: white;
   border-radius: 5px;
-  border: 2px solid rgb(102, 99, 99);
   height: 50px;
   width: auto;
   margin-bottom: 10px;
   text-align: center;
 }
+
 .option {
   background-color: rgb(7, 78, 172);
   color: white;
@@ -47,10 +146,12 @@ body {
   font-weight: bold;
   font-size: 1.1rem;
 }
+
 .option:hover {
   cursor: pointer;
   background-color: aqua;
 }
+
 #app {
   display: flex;
   flex-flow: row wrap;
@@ -60,12 +161,12 @@ body {
   align-items: flex-start;
   background-color: white;
   border-radius: 5px;
-  border: 2px solid rgb(102, 99, 99);
   height: fit-content;
   width: fit-content;
-  max-width: 600px;
+  max-width: 500px;
   text-align: center;
 }
+
 .card1 {
   background-color: #c5c7cc;
   height: 120px;
@@ -74,6 +175,7 @@ body {
   border-radius: 5px;
   border: 2px solid rgb(95, 94, 94);
 }
+
 .card2 {
   background-color: #b8c9f1;
   height: 120px;
