@@ -11,7 +11,7 @@ This repository contains some excersices, concepts and mini-projects to practice
 
 ## Features CRUD App with Express.js
 
-![Oriente Scenery](/public/og-image.png)
+![CRUD App](./express/public/og-image.png)
 
 The app contains frontend and backend development skills, including:
 
