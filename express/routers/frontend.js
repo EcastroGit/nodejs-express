@@ -1,11 +1,25 @@
 const express = require("express");
 const { frontend } = require("../datos/cursos.js").infoCursos;
+const { validationResult } = require("express-validator");
+const { postValidations, putValidations, deleteValidations } = require("../validations/validations.js");
 
 // Router
 const routerFrontend = express.Router();
 
-// Middleware
+// Middlewares
 routerFrontend.use(express.json());
+
+// Función para validar datos de entrada en post, put y delete
+const validate = (validations) => {
+  return async (req, res, next) => {
+    await Promise.all(validations.map((validation) => validation.run(req)));
+    const errors = validationResult(req);
+    if (errors.isEmpty()) {
+      return next();
+    }
+    res.status(422).json({ errors: errors.array() });
+  };
+};
 
 // Routing
 routerFrontend.get("/", (req, res) => {
@@ -35,13 +49,22 @@ routerFrontend.get("/:lenguaje/:nivel", (req, res) => {
   res.send(JSON.stringify(resultados));
 });
 
-routerFrontend.post("/", (req, res) => {
+routerFrontend.post("/",
+validate(postValidations),
+(req, res) => {
   let cursoNuevo = req.body;
+  const cursoExistente = frontend.find(curso => curso.id == cursoNuevo.id);
+  if (cursoExistente) {
+    res.status(400).json({ message: "400: el ID ingresado ya existe." });
+  } else {
   frontend.push(cursoNuevo);
   res.send(JSON.stringify(frontend));
+}
 });
 
-routerFrontend.put("/:id", (req, res) => {
+routerFrontend.put("/:id", 
+validate(putValidations),
+(req, res) => {
   const cursoActualizado = req.body;
   const id = req.params.id;
   const indice = frontend.findIndex(curso => curso.id == id);
@@ -49,8 +72,7 @@ routerFrontend.put("/:id", (req, res) => {
     frontend[indice] = cursoActualizado;
     res.send(JSON.stringify(frontend)); 
   } else {
-    console.log(`No existe el curso con id: ${id}`);
-    res.status(404).send("Curso no encontrado");
+    res.status(404).json({ message: "404: No existe el ID ingresado" });
   }
 });
 
@@ -65,13 +87,17 @@ routerFrontend.patch("/:id", (req, res) => {
   res.send(JSON.stringify(frontend));
 });
 
-routerFrontend.delete("/:id", (req, res) => {
+routerFrontend.delete("/:id", 
+validate(deleteValidations),
+(req, res) => {
   const id = req.params.id;
   const indice = frontend.findIndex(curso => curso.id == id);
-  if(indice >= 0){
+  if (indice >= 0) {
     frontend.splice(indice, 1);
+    res.json({ message: "Curso eliminado exitosamente" });
+  } else {
+    res.status(404).json({ message: "404: No existe el ID ingresado" });
   }
-  res.send(JSON.stringify(frontend));
 });
 
 module.exports = routerFrontend;

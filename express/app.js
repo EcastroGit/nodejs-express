@@ -16,7 +16,6 @@ app.use("/api/cursos/frontend", routerFrontend);
 const routerBackend = require("./routers/backend.js");
 app.use("/api/cursos/backend", routerBackend);
 
-
 // Routing
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));

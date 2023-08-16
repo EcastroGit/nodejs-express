@@ -7,7 +7,7 @@ function showData(data, category) {
   data.forEach((curso) => {
     const card = document.createElement("div");
     card.setAttribute("class", category === "frontend" ? "card1" : "card2");
-    
+
     const id = document.createElement("p");
     id.textContent = `ID: ${curso.id}`;
     card.appendChild(id);
@@ -26,7 +26,7 @@ function showData(data, category) {
 
     app.appendChild(card);
   });
-};
+}
 
 // GET
 function getFrontData() {
@@ -34,20 +34,19 @@ function getFrontData() {
     .then((res) => res.json())
     .then((data) => showData(data, "frontend"))
     .catch((error) => console.error(error));
-};
+}
 
 function getBackData() {
   fetch("http://localhost:3000/api/cursos/backend")
     .then((res) => res.json())
     .then((data) => showData(data, "backend"))
     .catch((error) => console.error(error));
-};
+}
 
 // POST
 function submitPostForm(event) {
-  
   event.preventDefault(); // Importante para el correcto envío del formulario
-  
+
   // Selector de categoría de cursos frontend o backend
   const selector = document.querySelector("#selector").value;
   let category = "";
@@ -58,11 +57,11 @@ function submitPostForm(event) {
   const postLenguaje = document.querySelector("#post-lenguaje").value;
   const postNivel = document.querySelector("#post-nivel").value;
 
-  if (selector === "Frontend"){
+  if (selector === "Frontend") {
     category = "frontend";
   } else {
     category = "backend";
-  };
+  }
 
   fetch(`http://localhost:3000/api/cursos/${category}`, {
     method: "POST",
@@ -83,23 +82,30 @@ function submitPostForm(event) {
         document.querySelector("#post-titulo").value = "";
         document.querySelector("#post-lenguaje").value = "";
         document.querySelector("#post-nivel").value = "";
-        if (selector === "Frontend"){
+        if (selector === "Frontend") {
           getFrontData();
         } else {
           getBackData();
-        };
+        }
+      } else {
+        return response.json(); // Parsear el cuerpo de la respuesta en formato JSON
+      }
+    })
+    .then((errorData) => {
+      if (errorData && errorData.message) {
+        alert(errorData.message); // Mostrar el mensaje de error 400 en una alerta
       }
     })
     .catch((error) => {
-      console.error(error);
+      alert(error); // Mostrar una alerta en caso de cualquier otro error
     });
-};
+}
 
 // PUT or PATCH
 
 function submitPutForm(event) {
-  event.preventDefault(); // Importante para el correcto envío del formulario
-  
+  event.preventDefault();
+
   const selector = document.querySelector("#selector").value;
   let category = "";
   
@@ -115,45 +121,55 @@ function submitPutForm(event) {
   }
 
   const url = `http://localhost:3000/api/cursos/${category}/${putId}`; // Cambia la URL para incluir el ID del recurso
+
+  const confirmUpdate = window.confirm("¿Confirma actualización del curso?");
   
-  fetch(url, {
-    method: "PUT", // Modificar en caso de PATCH
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      id: putId, // Retirar en caso de PATCH
-      titulo: postTitulo,
-      lenguaje: postLenguaje,
-      nivel: postNivel,
-    }),
-  })
-    .then((response) => {
-      if (response.ok) {
-        document.querySelector("#put-id").value = "";
-        document.querySelector("#put-titulo").value = "";
-        document.querySelector("#put-lenguaje").value = "";
-        document.querySelector("#put-nivel").value = "";
-        if (selector === "Frontend") {
-          getFrontData();
-        } else {
-          getBackData();
-        }
-      }
+  if (confirmUpdate) {
+    fetch(url, {
+      method: "PUT", // Modificar en caso de PATCH
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: putId, // Retirar en caso de PATCH
+        titulo: postTitulo,
+        lenguaje: postLenguaje,
+        nivel: postNivel,
+      }),
     })
-    .catch((error) => {
-      console.error(error);
-    });
+      .then((response) => {
+        if (response.ok) {
+          document.querySelector("#put-id").value = "";
+          document.querySelector("#put-titulo").value = "";
+          document.querySelector("#put-lenguaje").value = "";
+          document.querySelector("#put-nivel").value = "";
+          if (selector === "Frontend") {
+            getFrontData();
+          } else {
+            getBackData();
+          }
+        } else {
+          return response.json();
+        }
+      })
+      .then((errorData) => {
+        if (errorData && errorData.message) {
+          alert(errorData.message); 
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 }
 
 // DELETE
 
 function submitDeleteForm(event) {
-  event.preventDefault(); // Importante para el correcto envío del formulario
-  
+  event.preventDefault();
+
   const selector = document.querySelector("#selector").value;
   let category = "";
-
   const deleteId = document.querySelector("#delete-id").value;
 
   if (selector === "Frontend") {
@@ -164,22 +180,33 @@ function submitDeleteForm(event) {
 
   const url = `http://localhost:3000/api/cursos/${category}/${deleteId}`;
 
-  fetch(url, {
-    method: "DELETE", 
-  })
-    .then((response) => {
-      if (response.ok) {
-        document.querySelector("#delete-id").value = "";
-        if (selector === "Frontend") {
-          getFrontData();
-        } else {
-          getBackData();
-        }
-      }
+  const confirmDelete = window.confirm(
+    "¿Estás seguro de que deseas borrar el curso?"
+  );
+
+  if (confirmDelete) {
+    fetch(url, {
+      method: "DELETE",
     })
-    .catch((error) => {
-      console.error(error);
-    });
-
+      .then((response) => {
+        if (response.ok) {
+          document.querySelector("#delete-id").value = "";
+          if (selector === "Frontend") {
+            getFrontData();
+          } else {
+            getBackData();
+          }
+        } else {
+          return response.json();
+        }
+      })
+      .then((errorData) => {
+        if (errorData && errorData.message) {
+          alert(errorData.message);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 }
-
